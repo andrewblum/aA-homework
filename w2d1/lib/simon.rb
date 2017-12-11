@@ -1,0 +1,61 @@
+class Simon
+  COLORS = %w(red blue green yellow)
+
+  attr_accessor :sequence_length, :game_over, :seq
+
+  def initialize
+    @sequence_length = 1
+    @game_over = false
+    @seq = []
+  end
+
+  def play
+    add_random_color
+    until @game_over
+      take_turn
+    end
+    game_over_message
+    reset_game
+    play
+  end
+
+  def take_turn
+    show_sequence
+    require_sequence
+    if not @game_over
+      round_success_message
+      @sequence_length += 1
+    end
+  end
+
+  def show_sequence
+    p @seq
+    sleep(3)
+    system('clear')
+    add_random_color
+  end
+
+  def require_sequence
+    puts "enter the sequence:"
+    input = gets.chomp
+    @game_over = true if input != @seq
+  end
+
+  def add_random_color
+    @seq << COLORS.sample
+  end
+
+  def round_success_message
+    p "good job, youve made it to round #{@sequence_length}"
+  end
+
+  def game_over_message
+    p "sorry you lose, you made it to round #{@sequence_length}"
+  end
+
+  def reset_game
+    @sequence_length = 1
+    @game_over = false
+    @seq = []
+  end
+end
