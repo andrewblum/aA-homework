@@ -45,12 +45,12 @@ describe Dessert do
 
   describe "#eat" do
     it "subtracts an amount from the quantity" do
-      brownie.eat(1)
-      expect(brownie.quantity).to eq(49)
+      brownie.eat(20)
+      expect(brownie.quantity).to eq(30)
     end
 
     it "raises an error if the amount is greater than the quantity" do
-      expect{ brownie.eat(530) }.to raise_error("not enough left!")
+      expect{ brownie.eat(51) }.to raise_error("not enough left!")
     end
   end
 
